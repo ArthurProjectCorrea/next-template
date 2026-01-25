@@ -74,6 +74,7 @@ Short, actionable instructions to help an AI coding agent be productive in this 
 
 - Automated releases are handled with `semantic-release` via `.github/workflows/release.yml`.
 - By default, **npm publishing is disabled** (the workflow creates GitHub releases and updates the changelog). If you enable npm publishing, add `@semantic-release/npm` and set the `NPM_TOKEN` secret in repository settings.
+- The release workflow now requires write permissions for contents, issues, and pull requests. If the runner cannot push or create issues, either enable **Allow GitHub Actions to push to this branch** in branch protection, or add a Personal Access Token with `repo` scope as the secret `SEMANTIC_RELEASE_TOKEN`. The workflow will use `SEMANTIC_RELEASE_TOKEN` if present; otherwise it falls back to the built-in `GITHUB_TOKEN`.
 - To run a release locally for testing, run `npx semantic-release --dry-run` and inspect the output.
 
 ---

@@ -103,6 +103,21 @@ If you want to enable npm publishing, update `release.config.js` to add `@semant
 - `NPM_TOKEN` — for npm publish (only required if you enable npm publishing).
 - `GITHUB_TOKEN` — automatically provided by GitHub Actions (used to create releases and release notes).
 
+Permissions & tokens
+
+- The release workflow requires write permissions to push changelogs/tags and to create issues; the workflow now sets:
+
+```yaml
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+```
+
+- If you have branch protection enabled on `main`, go to the branch protection rules and enable **Allow GitHub Actions to push to this branch** (or use a personal access token). If Actions cannot push due to protection rules, semantic-release will fail.
+
+- If you need broader permissions (e.g., push across forks or special enterprise restrictions), create a Personal Access Token with `repo` scope and add it as a repository secret named `SEMANTIC_RELEASE_TOKEN`. The release workflow will use that token if present.
+
 The release workflow is in `.github/workflows/release.yml` and runs on pushes to `main`.
 
 Se precisar de ajuda com algo específico, abra uma issue ou envie uma PR com a proposta — e obrigado por contribuir! ✨
