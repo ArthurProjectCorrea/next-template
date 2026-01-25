@@ -31,7 +31,8 @@ Short, actionable instructions to help an AI coding agent be productive in this 
 - Git hooks:
   - `npm run prepare` installs Lefthook; test hooks with `npx lefthook run pre-commit`.
 - CI:
-  - `.github/workflows/ci.yml` uses Node 18 and runs `npm ci` → `npm run build` → `npm run lint` → `npx prettier --check .`.
+  - `.github/workflows/ci.yml` uses **Node 20.9.0 (minimum required by Next.js)** and runs `npm ci` → `npm run build` → `npm run lint` → `npx prettier --check .`.
+  - If builds fail due to Node version, update the workflow `node-version` or add an `engines.node` entry to `package.json`.
 
 ## Debugging and common fixes (explicit examples)
 
@@ -68,6 +69,12 @@ Short, actionable instructions to help an AI coding agent be productive in this 
 - Install hooks: npm run prepare
 - Test hooks: npx lefthook run pre-commit
 - Prettier check (CI-style): npx prettier --check .
+
+## Releases
+
+- Automated releases are handled with `semantic-release` via `.github/workflows/release.yml`.
+- The workflow runs on pushes to `main` and requires the `NPM_TOKEN` secret to publish to npm (set in repository Secrets). GitHub provides `GITHUB_TOKEN` automatically for creating releases.
+- To run a release locally for testing, run `npx semantic-release --dry-run` and inspect the output.
 
 ---
 

@@ -94,4 +94,13 @@ npm run lint
 npm run build
 ```
 
+## 🔁 Releases automatizados
+
+This repository uses `semantic-release` to cut releases automatically from CI. To enable publishing to npm (if you plan to publish packages), configure the following repository secrets in GitHub:
+
+- `NPM_TOKEN` — for npm publish (if you enable `npmPublish` in `release.config.js`).
+- `GITHUB_TOKEN` — automatically provided by GitHub Actions (used to create releases and release notes).
+
+The release workflow is in `.github/workflows/release.yml` and runs on pushes to `main`.
+
 Se precisar de ajuda com algo específico, abra uma issue ou envie uma PR com a proposta — e obrigado por contribuir! ✨
