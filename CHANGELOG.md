@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/ArthurProjectCorrea/next-template/compare/v1.1.0...v1.1.1) (2026-01-30)
+
+### Bug Fixes
+
+- **release:** add @semantic-release/npm plugin to update package.json version ([b3071b3](https://github.com/ArthurProjectCorrea/next-template/commit/b3071b39e4557a6b3bfdb816f0509048cd59cfa2))
+
 # [1.1.0](https://github.com/ArthurProjectCorrea/next-template/compare/v1.0.0...v1.1.0) (2026-01-28)
 
 ### Features
