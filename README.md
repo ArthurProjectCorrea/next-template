@@ -1,123 +1,135 @@
 # next-template
 
-📦 Projeto template Next.js com TypeScript, Tailwind e componentes shadcn UI
+Template Next.js com TypeScript, Tailwind CSS 4, shadcn UI, i18n e fluxo de qualidade (CI, hooks, semantic-release). Use como ponto de partida para novos projetos.
 
-## 🚀 Primeiros passos (em Português)
+---
 
-Siga estes passos rápidos após clonar o repositório.
+## Primeiros passos (após clonar)
 
-1. Clone o repositório:
+Ao clonar este repositório como template, o projeto ainda terá o nome, versão e histórico do template. Siga um dos fluxos abaixo.
+
+### Opção 1: Script automático (recomendado)
+
+Execute **uma vez** após clonar. O script:
+
+- Define o **nome** do projeto no `package.json` com o nome do repositório (extraído do `git remote origin`)
+- Zera a **versão** para `0.0.0`
+- **Remove** o `CHANGELOG.md` do template
+- Atualiza o **primeiro commit** com a mensagem `chore: first commit` (incluindo essas alterações)
 
 ```bash
-git clone <REPO_URL>
-cd next-template
+git clone <URL_DO_SEU_REPO>
+cd <nome-do-repo>
+
+npm run init
 ```
 
-2. (Opcional / conforme solicitado) Renomeie o último commit para padronizar a mensagem inicial:
-
-> **Atenção:** modificar o último commit reescreve o histórico local. Se o commit já foi enviado ao remoto, será necessário forçar o push (use com cuidado).
-
-```bash
-git commit --amend -m "chore: first commit"
-# Se precisar atualizar o remoto (somente quando souber o que está fazendo):
-# git push --force-with-lease origin <branch>
-```
-
-3. Instale as dependências e prepare hooks:
+Depois:
 
 ```bash
 npm install
 npm run prepare   # instala os git hooks (lefthook)
-```
-
-4. Execute o ambiente de desenvolvimento:
-
-```bash
 npm run dev
 ```
 
-5. Verificações e boas práticas locais:
+> **Importante:** o script usa o nome do repositório a partir de `git remote get-url origin`. Configure o remote antes de rodar `npm run init` se você clonou por outro meio.
 
-- Formatar o código: `npm run format`
-- Rodar linter: `npm run lint`
-- Build de produção: `npm run build`
-- (Se aplicável) Rodar testes: `npm test`
-- Executar hooks manualmente: `npx lefthook run pre-commit`
+### Opção 2: Passos manuais
 
----
+1. **Altere o nome e a versão** em `package.json`:
+   - `name`: nome do seu projeto (recomendado: mesmo nome do repositório)
+   - `version`: `0.0.0`
 
-## 🧭 Breve descrição da stack deste template
+2. **Remova o changelog do template:** apague o arquivo `CHANGELOG.md` (o semantic-release criará um novo ao fazer releases).
 
-Este template foi montado para ser um ponto de partida moderno com foco em produtividade e consistência:
+3. **Padronize o primeiro commit** (opcional):
 
-- **Next.js (App Router)** — SSR, rotas, otimizações de build.
-- **TypeScript** — tipagem estática para maior segurança e DX.
-- **Tailwind CSS** — utilitários para estilização rápida.
-- **shadcn UI primitives** — componentes acessíveis e reutilizáveis (localizados em `components/ui`).
-- **next-themes** — suporte a dark/light mode.
-- **nextjs-toploader** — indicador de carregamento global.
-- **Lefthook + lint-staged** — git hooks e formatação/lint automático.
-- **Prettier / ESLint** — formatação e regras de qualidade de código.
+   ```bash
+   git add -A
+   git commit --amend -m "chore: first commit"
+   ```
 
----
+   > Modificar o último commit reescreve o histórico. Se já tiver enviado ao remoto, será necessário `git push --force-with-lease origin <branch>` (use com cuidado).
 
-## 🔧 Boas práticas e foco em componentes nativos
+4. **Instale dependências e prepare os hooks:**
 
-**Use preferencialmente os componentes nativos do projeto** e siga as instruções de `docs/shadcn-ui`:
-
-- Não adicione novos componentes diretamente em `components/ui` (esse diretório é reservado para implementações upstream); crie componentes reutilizáveis na raiz `components/`.
-- Prefira **composição** e **wrappers** ao invés de duplicar comportamento.
-- Sempre documente novos componentes em `docs/shadcn-ui` e adicione testes/accessibility quando necessário.
-
-> Seguir essas práticas garante consistência visual, melhor manutenção, e compatibilidade com o sistema de design do projeto.
+   ```bash
+   npm install
+   npm run prepare
+   npm run dev
+   ```
 
 ---
 
-## ✅ Resumo rápido dos comandos úteis
+## Tecnologias do template
+
+| Área            | Tecnologia                                                                      |
+| --------------- | ------------------------------------------------------------------------------- |
+| **Framework**   | Next.js 16 (App Router), React 19                                               |
+| **Linguagem**   | TypeScript                                                                      |
+| **Estilo**      | Tailwind CSS 4, tw-animate-css                                                  |
+| **Componentes** | shadcn UI (Radix, CVA, Tailwind), Lucide icons                                  |
+| **i18n**        | Rotas por locale (`/[lang]`), proxy para redirect, dicionários em `lang/*.json` |
+| **Temas**       | next-themes (dark/light/system)                                                 |
+| **UX**          | nextjs-toploader                                                                |
+| **Formulários** | React Hook Form, Zod, @hookform/resolvers                                       |
+| **Qualidade**   | ESLint, Prettier, Lefthook, lint-staged                                         |
+| **CI/CD**       | GitHub Actions (CI + Release), semantic-release                                 |
+
+- **Node:** `>=20.9.0` (definido em `engines` no `package.json`).
+
+---
+
+## Qualidade e boas práticas
+
+- **Sempre** rode antes de commitar:
+  - `npm run format` — formata o código
+  - `npm run lint` — verifica regras de lint
+  - `npm run build` — garante que o projeto compila
+
+- **Git hooks (Lefthook):** o `prepare` instala hooks que rodam Prettier e ESLint nos arquivos staged. Mantenha `npm run prepare` após clonar.
+
+- **Commits:** prefira mensagens no padrão [Conventional Commits](https://www.conventionalcommits.org/) (ex.: `feat:`, `fix:`, `chore:`) para o semantic-release gerar changelog e versões corretamente.
+
+- **Componentes:**
+  - Use os componentes em `components/ui` (shadcn) como base; para novos componentes reutilizáveis, crie na raiz de `components/`.
+  - Consulte `docs/shadcn-ui` para uso e documentação.
+  - Prefira composição e wrappers em vez de duplicar comportamento.
+
+- **i18n:** traduções em `lang/` organizadas por página/componente (ex.: `RootPage`, `RootLayout` em `lang/en.json`). Novos idiomas: novo JSON em `lang/` e registro em `app/[lang]/dictionaries.ts` e no `proxy.ts`.
+
+---
+
+## Comandos úteis
 
 ```bash
-# clonar
-git clone <REPO_URL>
-cd next-template
+# Desenvolvimento
+npm run dev          # servidor de desenvolvimento
 
-# alterar mensagem do último commit (local)
-git commit --amend -m "chore: first commit"
+# Build e produção
+npm run build        # build de produção
+npm run start        # inicia o servidor de produção (após build)
 
-# instalar, preparar hooks e rodar
-after npm install
-npm run prepare
-npm run dev
+# Qualidade
+npm run format       # Prettier (escreve nos arquivos)
+npm run lint         # ESLint
+npx lefthook run pre-commit   # roda o hook de pre-commit manualmente
 
-# qualidade
-npm run format
-npm run lint
-npm run build
+# Template (após clonar)
+npm run init         # primeiros passos: nome, versão, changelog, primeiro commit
 ```
 
-## 🔁 Releases automatizados
+---
 
-This repository uses `semantic-release` to cut releases automatically from CI. Currently, **npm publishing is disabled by default** (the release job creates GitHub releases and a changelog but does not publish to npm).
+## Releases automatizados
 
-If you want to enable npm publishing, update `release.config.js` to add `@semantic-release/npm` and set `npmPublish: true`, then configure the following repository secret in GitHub:
+O repositório usa **semantic-release** na CI: a cada push em `main` (após o workflow de CI passar), o job de release pode criar tags, GitHub Release e atualizar o `CHANGELOG.md`. A publicação no npm está **desativada** por padrão (`release.config.js`).
 
-- `NPM_TOKEN` — for npm publish (only required if you enable npm publishing).
-- `GITHUB_TOKEN` — automatically provided by GitHub Actions (used to create releases and release notes).
+- **Tokens:** o workflow usa `GITHUB_TOKEN`; se precisar de permissões extras (ex.: branch protection), crie um Personal Access Token com escopo `repo` e defina o secret `SEMANTIC_RELEASE_TOKEN`.
+- **Branch protection:** em repositórios com proteção em `main`, pode ser necessário permitir que o GitHub Actions faça push (ou usar o token acima).
 
-Permissions & tokens
+O workflow de release está em `.github/workflows/release.yml` e depende do CI (`.github/workflows/ci.yml`).
 
-- The release workflow requires write permissions to push changelogs/tags and to create issues; the workflow now sets:
+---
 
-```yaml
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-```
-
-- If you have branch protection enabled on `main`, go to the branch protection rules and enable **Allow GitHub Actions to push to this branch** (or use a personal access token). If Actions cannot push due to protection rules, semantic-release will fail.
-
-- If you need broader permissions (e.g., push across forks or special enterprise restrictions), create a Personal Access Token with `repo` scope and add it as a repository secret named `SEMANTIC_RELEASE_TOKEN`. The release workflow will use that token if present.
-
-The release workflow is in `.github/workflows/release.yml` and runs on pushes to `main`.
-
-Se precisar de ajuda com algo específico, abra uma issue ou envie uma PR com a proposta — e obrigado por contribuir! ✨
+Se precisar de ajuda com algo específico, abra uma issue ou envie uma PR. Obrigado por usar o template.

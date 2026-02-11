@@ -2,7 +2,7 @@
 
 import NextTopLoader from 'nextjs-toploader';
 
-export default function NextTopLoaderWrapper() {
+export default function TopLoaderWrapper() {
   return (
     <NextTopLoader
       color="var(--primary)"
