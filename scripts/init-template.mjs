@@ -34,7 +34,9 @@ function getRepoName() {
     console.log('○ Usando nome da pasta como nome do projeto:', dirName);
     return dirName;
   }
-  console.warn('⚠️  Não foi possível obter o nome (remote ou pasta). Defina "name" em package.json manualmente.');
+  console.warn(
+    '⚠️  Não foi possível obter o nome (remote ou pasta). Defina "name" em package.json manualmente.',
+  );
   return null;
 }
 
@@ -44,7 +46,11 @@ function updatePackageJson(newName, newVersion = '0.0.0') {
   pkg.name = newName;
   pkg.version = newVersion;
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n', 'utf8');
-  console.log('✓ package.json atualizado: name = "%s", version = "%s"', newName, newVersion);
+  console.log(
+    '✓ package.json atualizado: name = "%s", version = "%s"',
+    newName,
+    newVersion,
+  );
 }
 
 function removeChangelog() {
@@ -60,12 +66,16 @@ function removeChangelog() {
 function amendFirstCommit() {
   const gitDir = path.join(root, '.git');
   if (!fs.existsSync(gitDir)) {
-    console.log('○ Diretório .git não encontrado; pulando atualização do commit.');
+    console.log(
+      '○ Diretório .git não encontrado; pulando atualização do commit.',
+    );
     return;
   }
   const hasChanges = run('git status --porcelain');
   if (!hasChanges) {
-    console.log('○ Nenhuma alteração para incluir no commit. Para apenas alterar a mensagem:');
+    console.log(
+      '○ Nenhuma alteração para incluir no commit. Para apenas alterar a mensagem:',
+    );
     console.log('  git commit --amend -m "chore: first commit"');
     return;
   }
@@ -81,10 +91,14 @@ const repoName = getRepoName();
 if (repoName) {
   updatePackageJson(repoName, '0.0.0');
 } else {
-  console.log('○ Pulando alteração do package.json. Defina "name" e "version" manualmente.');
+  console.log(
+    '○ Pulando alteração do package.json. Defina "name" e "version" manualmente.',
+  );
 }
 
 removeChangelog();
 amendFirstCommit();
 
-console.log('\n✅ Próximos passos: npm install && npm run prepare && npm run dev\n');
+console.log(
+  '\n✅ Próximos passos: npm install && npm run prepare && npm run dev\n',
+);
