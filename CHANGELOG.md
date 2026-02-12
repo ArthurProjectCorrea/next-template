@@ -1,3 +1,9 @@
+# [1.2.0](https://github.com/ArthurProjectCorrea/next-template/compare/v1.1.1...v1.2.0) (2026-02-12)
+
+### Features
+
+- melhorias no template e componentes i18n ([ede6c2d](https://github.com/ArthurProjectCorrea/next-template/commit/ede6c2d50b633bbb8624c5c1b0c4d8b6c5840811))
+
 ## [1.1.1](https://github.com/ArthurProjectCorrea/next-template/compare/v1.1.0...v1.1.1) (2026-01-30)
 
 ### Bug Fixes
