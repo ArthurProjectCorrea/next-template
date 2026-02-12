@@ -16,7 +16,7 @@ const root = path.resolve(__dirname, '..');
 function run(cmd, opts = {}) {
   try {
     return execSync(cmd, { encoding: 'utf8', cwd: root, ...opts }).trim();
-  } catch (e) {
+  } catch {
     return null;
   }
 }

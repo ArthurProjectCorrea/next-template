@@ -2,11 +2,7 @@ import { match } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-
-const locales = ['en'] as const;
-const defaultLocale = 'en';
-
-export type Locale = (typeof locales)[number];
+import { defaultLocale, locales, type Locale } from '@/lib/i18n';
 
 function getLocale(request: NextRequest): Locale {
   const headers = {
@@ -31,5 +27,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next).*)'],
+  matcher: [
+    '/((?!_next|api|favicon\\.ico|.*\\.(?:ico|png|svg|jpg|jpeg|gif|webp|woff2?|ttf|eot)).*)',
+  ],
 };

@@ -2,7 +2,7 @@
 
 ## O que foi feito
 
-- Adicionei o **NextTopLoader** como um componente cliente em `components/next-top-loader.tsx`.
+- Adicionei o **NextTopLoader** como um componente cliente em `components/top-loader.tsx`.
 - Renderizei o componente no `app/layout.tsx` para mostrar a barra de carregamento global em todas as páginas.
 - Configurei o TopLoader para **usar tokens CSS** definidos em `app/globals.css` (por exemplo `--primary`) para que a cor acompanhe o tema do site.
 
@@ -10,20 +10,20 @@
 
 ## Arquivos modificados 🔧
 
-- `components/next-top-loader.tsx` (novo)
+- `components/top-loader.tsx` (novo)
 - `app/layout.tsx` (importou e adicionou `<TopLoader />`)
 
 ---
 
 ## Como está implementado (resumo)
 
-- `components/next-top-loader.tsx` é um **client component** (contém `'use client'`) que simplesmente renderiza `<NextTopLoader />` com props configuradas.
+- `components/top-loader.tsx` é um **client component** (contém `'use client'`) que simplesmente renderiza `<NextTopLoader />` com props configuradas.
 - Para usar tokens do tema, passei **valores CSS** nas props (por exemplo `color="var(--primary)"`). O TopLoader aceita strings CSS para cor e sombra, então as variáveis do `:root` em `app/globals.css` são aplicadas automaticamente.
 
 Exemplo (trecho):
 
 ```tsx
-// components/next-top-loader.tsx
+// components/top-loader.tsx
 'use client';
 import NextTopLoader from 'nextjs-toploader';
 
@@ -43,7 +43,7 @@ export default function NextTopLoaderWrapper() {
 No `app/layout.tsx` apenas importe e renderize o componente cliente:
 
 ```tsx
-import TopLoader from '@/components/next-top-loader';
+import TopLoader from '@/components/top-loader';
 
 export default function RootLayout({ children }) {
   return (

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ThemeProvider } from '@/components/theme-provider';
 import TopLoader from '@/components/top-loader';
+import { locales } from '@/lib/i18n';
 import { getDictionary, hasLocale } from './dictionaries';
 
 type LayoutProps = Readonly<{
@@ -18,13 +19,13 @@ export async function generateMetadata({
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
   return {
-    title: dict.RootLayout.title,
-    description: dict.RootLayout.description,
+    title: dict.LangLayout.title,
+    description: dict.LangLayout.description,
   };
 }
 
 export async function generateStaticParams() {
-  return [{ lang: 'en' }];
+  return locales.map((lang) => ({ lang }));
 }
 
 export default async function LangLayout({ children, params }: LayoutProps) {

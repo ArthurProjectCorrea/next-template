@@ -96,7 +96,7 @@ npm run dev
   - Consulte `docs/shadcn-ui` para uso e documentação.
   - Prefira composição e wrappers em vez de duplicar comportamento.
 
-- **i18n:** traduções em `lang/` organizadas por página/componente (ex.: `RootPage`, `RootLayout` em `lang/en.json`). Novos idiomas: novo JSON em `lang/` e registro em `app/[lang]/dictionaries.ts` e no `proxy.ts`.
+- **i18n:** traduções em `lang/` organizadas por página/componente (ex.: `RootPage`, `RootLayout` em `lang/en.json`). Novos idiomas: adicione o locale em `lib/i18n.ts`, crie `lang/xx.json` e registre em `app/[lang]/dictionaries.ts`.
 
 ---
 

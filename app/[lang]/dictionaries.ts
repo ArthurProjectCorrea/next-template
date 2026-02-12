@@ -1,16 +1,12 @@
 import 'server-only';
+import { type Locale, hasLocale, locales } from '@/lib/i18n';
 
 const dictionaries = {
   en: () => import('../../lang/en.json').then((m) => m.default),
 } as const;
 
-export type Locale = keyof typeof dictionaries;
-
-export const locales: readonly Locale[] = ['en'];
-export const defaultLocale: Locale = 'en';
-
-export const hasLocale = (locale: string): locale is Locale =>
-  locale in dictionaries;
+export type { Locale };
+export { hasLocale, locales };
 
 export async function getDictionary(locale: Locale) {
   return dictionaries[locale]();
