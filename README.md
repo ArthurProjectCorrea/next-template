@@ -28,7 +28,7 @@ Depois:
 
 ```bash
 npm install
-npm run prepare   # instala os git hooks (lefthook)
+npm run prepare   # instala os git hooks (husky)
 npm run dev
 ```
 
@@ -73,7 +73,7 @@ npm run dev
 | **Temas**       | next-themes (dark/light/system)                                                 |
 | **UX**          | nextjs-toploader                                                                |
 | **Formulários** | React Hook Form, Zod, @hookform/resolvers                                       |
-| **Qualidade**   | ESLint, Prettier, Lefthook, lint-staged                                         |
+| **Qualidade**   | ESLint, Prettier, Husky, lint-staged                                            |
 | **CI/CD**       | GitHub Actions (CI + Release), semantic-release                                 |
 
 - **Node:** `>=20.9.0` (definido em `engines` no `package.json`).
@@ -87,9 +87,9 @@ npm run dev
   - `npm run lint` — verifica regras de lint
   - `npm run build` — garante que o projeto compila
 
-- **Git hooks (Lefthook):** o `prepare` instala hooks que rodam Prettier e ESLint nos arquivos staged. Mantenha `npm run prepare` após clonar.
+- **Git hooks (Husky):** o `prepare` instala hooks que rodam formatação, lint, build e `lint-staged` nos arquivos staged. Também valida mensagens de commit (Conventional Commits) via `commitlint`. Mantenha `npm run prepare` após clonar.
 
-- **Commits:** prefira mensagens no padrão [Conventional Commits](https://www.conventionalcommits.org/) (ex.: `feat:`, `fix:`, `chore:`) para o semantic-release gerar changelog e versões corretamente.
+- **Commits:** Prefira mensagens no padrão [Conventional Commits](https://www.conventionalcommits.org/) (ex.: `feat:`, `fix:`, `chore:`). O `commit-msg` hook do Husky verifica a formatação e impedirá commits que não sigam o padrão.
 
 - **Componentes:**
   - Use os componentes em `components/ui` (shadcn) como base; para novos componentes reutilizáveis, crie na raiz de `components/`.
@@ -113,7 +113,7 @@ npm run start        # inicia o servidor de produção (após build)
 # Qualidade
 npm run format       # Prettier (escreve nos arquivos)
 npm run lint         # ESLint
-npx lefthook run pre-commit   # roda o hook de pre-commit manualmente
+npx husky run pre-commit   # roda o hook de pre-commit manualmente
 
 # Template (após clonar)
 npm run init         # primeiros passos: nome, versão, changelog, primeiro commit
